@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, Button } from "react-native";
 import ListaProdutos from "./Componentes/Adaptadores/ListaProdutos";
 import axios from 'axios'
 import { useEffect } from "react";
+import CadastroProduto from "./Componentes/Adaptadores/CadastroProduto";
 
 
 
@@ -29,7 +30,7 @@ export default function Index() {
       style={estilo.container}
     >
      <ListaProdutos produtos={produtos}></ListaProdutos>
-     <Button title={contador.toString()}
+     <Button title={`Clicado ${contador.toString()} vezes`}
       onPress={()=>{clicarBotao()}} >
      </Button>
 
