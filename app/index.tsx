@@ -4,13 +4,20 @@ import ListaProdutos from "./Componentes/Adaptadores/ListaProdutos";
 import axios from 'axios'
 import { useEffect } from "react";
 import CadastroProduto from "./Componentes/Adaptadores/CadastroProduto";
+import { useRouter, useFocusEffect } from "expo-router";
+
 
 
 
 
 export default function Index() {
-  let [contador,setContador]= useState(0);
-  let [produtos,setProdutos]= useState([]);
+  const router  = useRouter();
+
+  useFocusEffect(()=>{
+    carregaProdutos();
+  })
+
+  let [produtos, setProdutos] = useState([]);
 
   useEffect(()=>{
     carregaProdutos();
@@ -29,24 +36,16 @@ export default function Index() {
     <View
       style={estilo.container}
     >
-     <ListaProdutos produtos={produtos}></ListaProdutos>
-     <Button title={`Clicado ${contador.toString()} vezes`}
-      onPress={()=>{clicarBotao()}} >
+     <ListaProdutos produtos={produtos} aoAtualizar={carregaProdutos}></ListaProdutos>
+     <Button title="Cadastrar" onPress={()=>{telaCadastro()}}>
      </Button>
-
-     <CadastroProduto/>
-
-      
     </View>
   );
 
-  function clicarBotao(){
-    setContador(contador+1);
-  
+  function telaCadastro(){
+    router.push('/telas/cadastro');
   }
 }
-
-
 
 const estilo= StyleSheet.create({
   container: {
